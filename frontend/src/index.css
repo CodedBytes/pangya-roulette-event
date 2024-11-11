@@ -1,0 +1,430 @@
+/*
+*   Layout: Baseado na Season 8 - Fresh Up.
+*   Copyright original: Ntreev Soft.
+*   Programado por: João Victor Segantini (CodedBytes) Sob a licensa MIT.
+*   Ideia original: Ideia de janelas retiradas da minha recriação da engine gráfica do pangya season 8, chamada Season 8.9;
+*   OBS: É de suma importancia respeitar a licensa,e conforme a mesma, caso o projeto seja utilizado,
+*   é obrigatorio o devido copyright delegado pelo dono do projeto!
+*   Neste caso: manter esta mensagem e as localizações dos copyrights, originalmente inseridos no projeto, da forma que estão!
+*/
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+main .draggable-window {
+  position: absolute;
+  width: 350px;
+  min-height: 120px;
+  background-color: #fff;
+  border: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  left: calc(50vw - 175px);
+  top: calc(50vh - 120px);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 10px 15px;
+  border-radius: 5px;
+  display: block;
+  opacity: 1;
+  z-index: 7;
+}
+
+main .draggable-window#window-1 {
+  position: absolute;
+  width: 450px;
+  min-height: 120px;
+  background-color: #fff;
+  border: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  left: calc(50vw - 225px);
+  top: calc(50vh - 300px);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 10px 15px;
+  border-radius: 5px;
+  display: block;
+  opacity: 1;
+  z-index: 7;
+}
+
+main .window-header {
+  padding: 10px;
+  height: 43px;
+  cursor: move;
+  background: rgb(59,156,254);
+  background: linear-gradient(180deg, rgba(59,156,254,1) 13%, rgba(52,44,247,1) 36%, rgba(59,156,254,1) 54%, rgba(255,255,255,1) 81%);
+  border-bottom: 0;
+  user-select: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-weight: 600;
+}
+
+main .window-header > span {
+  position: absolute;
+  top: 4px;
+  color: white;
+}
+
+main .window-header > .close{
+  padding: 0px;
+  width: 50px;
+  height: 25px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  font-weight: 600;
+  background-color: transparent;
+  border: 0px solid black;
+  color: white;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  transition: 0.1s ease-in-out;
+}
+
+main .window-header > .close:hover {
+  background-color: rgba(248, 87, 87, 0.7);
+  transition: 0.1s ease-in-out;
+}
+main .window-header > .close:active {
+  background-color: rgb(143, 0, 0);
+  transition: 0.1s ease-in-out;
+}
+
+main .window-content {
+  padding: 16px;
+  max-height: 550px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main .window-content > img {
+  margin-top: 20px;
+}
+
+main .window-content > span {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+main .window-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 6;
+}
+
+main .game-page {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("./imgs/bg.jpg");
+  background-size: cover;
+  background-blend-mode: color;
+  background-color: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main .game-page > .game-container{
+  border-top: 4px solid rgba(255, 255, 255, 0.2);
+  border-left: 2px solid rgba(255, 255, 255, 0.15);
+  border-right: 2px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 3px solid rgba(47, 47, 47, 0.3);
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(3px);
+  box-shadow: rgba(0, 0, 0, 0.65) 0px 7px 10px 3px;
+  width: 700px;
+  padding: 95px 12px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1rem;
+}
+
+main .game-page > .game-container > img{
+  position: absolute;
+  margin: auto;
+  top: -140px;
+  left: 0px;
+  right: 0px;
+}
+
+main .game-page > .game-container > .out-circle {
+  background-color: rgba(255, 255, 255, 0.642);
+  border: 1px solid rgb(121, 121, 121);
+  padding: 3.5px;
+  border-radius: 50%;
+  position: absolute;
+  top: -20px;
+  right: 15px;
+}
+
+main .game-page > .game-container > .out-circle > .mute_unmute{
+  padding: 7px;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgba(229, 229, 229, 0.846);
+  border: 1px solid rgb(89, 89, 89);
+}
+
+main .game-page > .game-container > .qty-container {
+  border: 1px solid rgb(163, 163, 163);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 4px 1px;
+  background-color: white;
+  border-radius: .3rem;
+  padding: 4px 20px 4px 20px;
+  width: 300px;
+  height: 55px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+main .game-page > .game-container > .qty-container > .numbers-container {
+  border: 1px solid rgb(106, 106, 106);
+  background-color: lightgray;
+  border-radius: .25rem;
+  width: 180px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  padding: 0px 10px;
+  justify-content: end;
+}
+
+
+main .game-page > .game-container > .qty-container > .numbers-container > span.qty {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(49, 49, 49);
+}
+
+main .game-page > .game-container > .roulette-section {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin: 35px 0px 25px 0px;
+  padding: 25px 0px 10px 0px;
+  border-radius: 1.3rem;
+  border: 1px solid rgb(163, 163, 163);
+  background-color: rgb(238, 238, 238);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 10px 1px;
+}
+
+main .game-page > .game-container > .roulette-section > .r-container {
+  display:flex ;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+main .game-page > .game-container > .roulette-section > .title {
+  position: absolute;
+  margin: auto;
+  top: 170px;
+  width: 100px;
+  text-align: center;
+  background-color: rgb(86, 102, 122);
+  border: 1px solid rgba(255, 255, 255, 0.463);
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 4px 1px;
+  border-top-left-radius: 30%;
+  border-top-right-radius: 30%;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  color: white;
+  font-weight: 600;
+  padding: 5px 10px;
+}
+
+main .game-page > .game-container > .roulette-section > .r-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0px 30px;
+}
+
+main .game-page > .game-container > .roulette-section > .r-container > .sub-container {
+  border: 1px solid black;
+  margin-right: 20px;
+  border-radius: .7rem;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 6px 1px;
+}
+
+main .game-page > .game-container > .roulette-section > .r-container > .sub-container > .square {
+  border: 1px solid black;
+  width: 75px;
+  height: 75px;
+  border-radius: .4rem;
+  background-color: lightgray;
+}
+
+main .game-page > .game-container > .roulette-section > .r-container > .sub-container > .square > div#itemBox {
+  position: absolute;
+  margin-left: 12px;
+  margin-top: 5px;
+}
+
+main .game-page > .game-container > .roulette-section > .r-container > button{
+  height: 45px;
+  width: 120px;
+  color: white;
+  background-color: rgb(42, 112, 165);
+  border: 0px;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 2px 4px 1px;
+  font-weight: 700;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+main .game-page > .game-container > .roulette-section > .r-container > button:hover {
+  background-color: rgb(87, 138, 178);
+  transition: 0.1s ease-in-out;
+}
+
+main .game-page > .game-container > .roulette-section > .r-container > button:active {
+  background-color: rgb(5, 64, 108);
+  transition: 0.1s ease-in-out;
+}
+
+main .game-page > .game-container > .roulette-section > .r-container > button:disabled {
+  background-color: rgb(5, 64, 108);
+  cursor: not-allowed;
+  transition: 0.1s ease-in-out;
+}
+
+main .game-page > .game-container > .items-section {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0px 25px 0px;
+  padding: 25px 0px 15px 0px;
+  border-radius: 1.3rem;
+  border: 1px solid rgb(163, 163, 163);
+  background-color: rgb(238, 238, 238);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 10px 1px;
+}
+
+main .game-page > .game-container > .items-section > .title {
+  position: absolute;
+  margin: auto;
+  top: 326px;
+  width: 100px;
+  text-align: center;
+  background-color: rgb(86, 102, 122);
+  border: 1px solid rgba(255, 255, 255, 0.463);
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 4px 1px;
+  border-top-left-radius: 30%;
+  border-top-right-radius: 30%;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  color: white;
+  font-weight: 600;
+  padding: 5px 10px;
+}
+
+main .game-page > .game-container > .items-section > .items-container {
+width: 100%;  
+padding: 0px 20px;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: center;
+}
+
+main .game-page > .game-container > .items-section > .items-container > .item-frame{
+  padding: 5px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main .game-page > .game-container > .items-section > .items-container > .item-frame > span {
+  font-size: 12px;
+  font-weight: 600;
+  word-wrap: break-word;
+  word-break: keep-all;
+  width: 68px;
+  height: 30px;
+  text-align: center;
+}
+main .game-page > .game-container > .items-section > .items-container > .item-frame > span.bar-name {
+  font-size: 12px;
+  font-weight: 600;
+  word-wrap: break-word;
+  word-break: keep-all;
+  width: 68px;
+  height: 12px;
+  text-align: center;
+}
+
+main .game-page > .game-container > .items-section > .items-container > .item-frame > span.qty {
+  font-size: 12px;
+  font-weight: 600;
+  word-wrap: break-word;
+  word-break: keep-all;
+  width: 68px;
+  height: 10px;
+  text-align: center;
+}
+
+main .game-page > .game-container > .items-section > .items-container > .item-frame > .out-frame {
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: .4rem;
+  margin-top: 4px;
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 4px 1px;
+}
+
+main .game-page > .game-container > .items-section > .items-container > .item-frame > .out-frame > .in-frame {
+  border: 1px solid black;
+  border-radius: .2rem;
+  padding: 6px 8px;
+  height: 50px;
+  background-color: lightgray;
+}
+
+main .game-page > .game-container > .items-section > .items-container > .item-frame > .prob-bar {
+  border: 1px solid black;
+  margin-top: 10px;
+  width: 80%;
+  height: 10px;
+  border-radius: 1rem;
+  display: flex;
+  background-color: lightgray;
+}
+
+/* Animations */
+@keyframes closeAnimation {
+  0% { opacity: 1; }
+  100% { 
+      opacity: 0; 
+      display: none;
+  }
+}
+
+@keyframes openAnimation {
+  0% { opacity: 0;}
+  100% { 
+      opacity: 1; 
+  }
+}
